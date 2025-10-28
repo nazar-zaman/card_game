@@ -1,0 +1,13 @@
+<code for making sprite_list>:
+sprite_list = arcade.SpriteList()
+for suit in ["clubs","hearts","spades","diamonds"]:
+    for card_n in ["a",2,3,4,5,6,7,8,9,10,11,13,13]:
+        filepath = f"/home/italyisashaitaly/vs code/card game/images/{suit}/{str(card_n)}{suit[0]}.png"
+        sprite = arcade.Sprite(filepath, scale=1.0)
+        sprite_list.append(sprite)
+
+notes:
+-file directory will change on another device
+
+-----------------------------
+

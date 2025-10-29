@@ -1,13 +1,15 @@
 <code for making sprite_list>:
-sprite_list = arcade.SpriteList()
+
+self.card_list = arcade.SpriteList()
+self.card_list_glcard_list_gl = []
+base_path = Path(__file__).parent
 for suit in ["clubs","hearts","spades","diamonds"]:
     for card_n in ["a",2,3,4,5,6,7,8,9,10,11,13,13]:
-        filepath = f"/home/italyisashaitaly/vs code/card game/images/{suit}/{str(card_n)}{suit[0]}.png"
-        sprite = arcade.Sprite(filepath, scale=1.0)
-        sprite_list.append(sprite)
-
-notes:
--file directory will change on another device
+        filepath = f"{base_path}/images/{suit}/{str(card_n)}{suit[0]}.png"
+        card_sprite = arcade.Sprite(filepath, scale=2.0)
+        card_sprite.card_name = f"{str(card_n)}{suit[0]}"
+        self.card_list.append(card_sprite)
+        self.card_list_gl.append(f"{str(card_n)}{suit[0]}")
 
 -----------------------------
 

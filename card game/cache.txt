@@ -13,3 +13,14 @@ for suit in ["clubs","hearts","spades","diamonds"]:
 
 -----------------------------
 
+self.card_list.remove(self.held_card)
+            self.card_list.append(self.held_card)
+        self.back_selected = arcade.get_sprites_at_point((x,y) , self.back_list)
+        if len(self.back_selected) != 0:
+            random.shuffle(self.card_list_gl)
+            self.top_card_gl = self.card_list_gl[-1]
+            self.card_list_gl.remove(self.top_card_gl)
+            self.player_cards.append(self.top_card_gl)
+            top_card = self.searchDeck(self.top_card_gl, self.card_list)
+            top_card.center_x = SCREEN_WIDTH/2
+            top_card.center_y = SCREEN_HEIGHT/2

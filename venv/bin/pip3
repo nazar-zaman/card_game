@@ -1,6 +1,4 @@
-#!/bin/sh
-'''exec' "/home/italyisashaitaly/vs code/venv/bin/python3" "$0" "$@"
-' '''
+#!/workspaces/card_game/venv/bin/python3
 # -*- coding: utf-8 -*-
 import re
 import sys

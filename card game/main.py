@@ -15,6 +15,7 @@ class CardGame(arcade.Window):
         self.back_list = arcade.SpriteList()
         self.player_cards = arcade.SpriteList()
         self.computer_cards = arcade.SpriteList()
+        self.placed_cards = arcade.SpriteList()
         
         #filling up card list w/ sprites
         base_path = Path(__file__).parent
@@ -24,8 +25,6 @@ class CardGame(arcade.Window):
                 card_sprite = arcade.Sprite(filepath, scale=2.0)
                 card_sprite.card_name = f"{str(card_n)}{suit[0]}"
                 self.card_list.append(card_sprite)
-                print(card_sprite.width)
-                print(card_sprite.height)
         
         #making seperate back sprite list for back cards for easy of animations:
         #functional back card
@@ -46,6 +45,9 @@ class CardGame(arcade.Window):
         self.all_cards.extend(self.back_list)
         print(self.card_list[-1].width)
         print(self.card_list[-1].height)
+
+        #other variables for other parts of the code which need a predetermined value:
+        self.validate = False
         
         #for user interaction with cards
         self.held_card = None
@@ -143,6 +145,13 @@ class CardGame(arcade.Window):
         self.top_card_back = None
 
     def on_update(self, delta):
+        self.cards_at_middle = arcade.get_sprites_at_point((SCREEN_WIDTH/2, SCREEN_HEIGHT/2), self.card_list)
+        if len(self.cards_at_middle) > 11:
+            tenth_last_card = self.cards[-10]
+            tenth_last_i = self.cards.index(tenth_last_card)
+            for i in range(tenth_last_i + 1):
+                self.card_list.insert(0, self.cards_at_middle[i])
+                s
         if self.updateR == "start game":
             self.generateCard(self)
             self.updateR = "make card move"
@@ -167,12 +176,11 @@ class CardGame(arcade.Window):
                     self.card_list.remove(self.held_card)
             if self.pickupR == 0:
                 self.updateR = "player turn"
+            #player turn
             if self.updateR == "player turn":
                 self.top_card = arcade.get_sprites_at_point()
                 card_name = self.top_card[-1].card_name
-                if card_name[0] == "j" and card_name[1] in ("s","c"):
-                    for card in ("jd","jh"):
-                        if validate 
+                
                 #check if a special card has been placed and if the player can place something in return
                 self.validate = 0
                 for sprite in self.player_cards:
@@ -184,7 +192,6 @@ class CardGame(arcade.Window):
 
 
         
-
         for card in self.card_list:
             if card.left < 0:
                 card.left = 0

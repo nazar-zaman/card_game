@@ -82,8 +82,12 @@ class CardGame(arcade.Window):
     def search_deck(self, card, card_list):
         for sprite in card_list:
             if sprite.card_name == card:
+                validate = True
                 break
-        return sprite
+        if validate:
+            return sprite
+        else:
+            return False
     
     def generateCard(self):
         self.shuffle(self.card_list)
@@ -164,7 +168,22 @@ class CardGame(arcade.Window):
             if self.pickupR == 0:
                 self.updateR = "player turn"
             if self.updateR == "player turn":
-                
+                self.top_card = arcade.get_sprites_at_point()
+                card_name = self.top_card[-1].card_name
+                if card_name[0] == "j" and card_name[1] in ("s","c"):
+                    for card in ("jd","jh"):
+                        if validate 
+                #check if a special card has been placed and if the player can place something in return
+                self.validate = 0
+                for sprite in self.player_cards:
+                    test_list = arcade.get_sprites_at_point((SCREEN_WIDTH/2, SCREEN_HEIGHT/2), self.card_list)
+                    test_list.append(sprite)
+                    if self.validation(self, self.test_list):
+                        self.validate += 1
+                if self.validate == 0:
+
+
+        
 
         for card in self.card_list:
             if card.left < 0:

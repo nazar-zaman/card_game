@@ -3,8 +3,5 @@
   "python.analysis.extraPaths": [
     "${workspaceFolder}/venv/lib64/python3.12/site-packages",
     "${workspaceFolder}/venv/lib/python3.12/site-packages"
-  ],
-  "python.analysis.packageIndexDepths": {
-    "default": 2
-  }
+  ]
 }

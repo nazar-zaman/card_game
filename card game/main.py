@@ -51,14 +51,14 @@ class CardGame(arcade.Window):
         self.held_card = None
 
         #to keep track of number of cards that need to be picked up:
-        self.pickupR = 6
+        self.pickupR = 14
         
         #registers
         self.updateR = "start game"
         self.highlightR = None
 
-    def validation(self):
-        cards = arcade.get_sprites_at_point((SCREEN_WIDTH/4, SCREEN_HEIGHT/2), self.card_list)
+    def validation(self, sprite_list):
+        cards = arcade.get_sprites_at_point((SCREEN_WIDTH/4, SCREEN_HEIGHT/2), sprite_list)
         if len(cards) == 1:
             return False
         for i in range(len(cards)-1):
@@ -93,6 +93,7 @@ class CardGame(arcade.Window):
         sprite = self.search_deck(generated_card, self.card_list)
         sprite.center_x = SCREEN_WIDTH/4
         sprite.center_y = SCREEN_HEIGHT/2
+        return sprite
 
 
     def player_pickup(self, x, y):
@@ -105,9 +106,6 @@ class CardGame(arcade.Window):
         self.shuffle(self.card_list)
         self.computer_cards.append(self.card_list[-1])
         self.updateR ="computer turn"
-
-
-
 
     
     def on_draw(self):
@@ -148,7 +146,25 @@ class CardGame(arcade.Window):
             self.card_list[-1].center_x += 2
             if self.card_list[-1].center_x == SCREEN_WIDTH/2:
                 self.updateR = "deal cards"
-        elif self.updateR == 
+        elif self.updateR == "deal cards":
+            self.held_card = self.generateCard()
+            #deal player card
+            if self.pickupR % 2:
+                self.held_card.center_y -= 10
+                if self.held_card.center_y == 100:
+                    self.pickupR -= 1
+                    self.card_list.append(self.held_card)
+                    self.card_list.remove(self.held_card)
+            else:
+                self.held_card.center_y += 10
+                if self.held_card.bottom > SCREEN_HEIGHT:
+                    self.pickupR -= 1
+                    self.computer_cards.append(self.held_card)
+                    self.card_list.remove(self.held_card)
+            if self.pickupR == 0:
+                self.updateR = "player turn"
+            if self.updateR == "player turn":
+                
 
         for card in self.card_list:
             if card.left < 0:
